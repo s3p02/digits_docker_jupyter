@@ -243,7 +243,7 @@ FLOWER_PHOTO_PATH='/home/srpa3180/flower_photos/'
 ## To test for accuracy of our running model, we run the above, which returns a json as shown below.
 
 <kbd>
-  <img src="/d_21_jupyter_notebook_digits_test_model_better_prediction.png">
+  <img src="/d_23_jupyter_notebook_digits_test_model_better_prediction.png">
 </kbd>
 
 
@@ -255,7 +255,7 @@ FLOWER_PHOTO_PATH='/home/srpa3180/flower_photos/'
 ## As the Epoch reaches 30, the json, which shows "snapshots" as 1, indicates the completion of 30 epoch as shown below.
 
 <kbd>
-  <img src="/d_21_jupyter_notebook_digits_complete.png">
+  <img src="/d_24_jupyter_notebook_digits_complete.png">
 </kbd>
 
 
