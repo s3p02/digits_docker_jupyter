@@ -262,3 +262,55 @@ For creating our model, we shall run the following.
 </kbd>
 
 
+# Step 7 : Download model from docker container
+
+```
+def download_caffe_model(dataset_id,job_id,dir_name,docker_container_name):
+    dataset_id_path='jobs/'+dataset_id
+    job_id_path='jobs/'+job_id
+    d_ir='~/'+dir_name
+    !mkdir $d_ir
+    d_ir_temp=d_ir+'_temp'
+    !mkdir $d_ir_temp
+    !sudo nvidia-docker cp $docker_container_name:$dataset_id_path $d_ir_temp
+    !sudo nvidia-docker cp $docker_container_name:$job_id_path $d_ir_temp
+    !sudo ls -tr $d_ir_temp/$job_id/*.caffemodel
+    caffe_model_selection=raw_input()
+    if (str(caffe_model_selection)==str('all') or str(caffe_model_selection)==str('ALL')):
+        !sudo cp $d_ir_temp/$job_id/*.caffemodel $d_ir
+        !sudo cp $d_ir_temp/$job_id/caffe_output.log $d_ir
+    else:
+        
+        !sudo cp $caffe_model_selection $d_ir
+    !sudo cp $d_ir_temp/$dataset_id/labels.txt $d_ir
+    !sudo cp $d_ir_temp/$dataset_id/mean.binaryproto $d_ir
+    !sudo cp $d_ir_temp/$job_id/deploy.prototxt $d_ir
+    !sudo cp $d_ir_temp/$job_id/original.prototxt $d_ir
+    !sudo cp $d_ir_temp/$job_id/solver.prototxt $d_ir
+    !sudo cp $d_ir_temp/$job_id/train_val.prototxt $d_ir
+    !sudo rm -rf $d_ir_temp/
+```
+
+# Run the above function
+
+Note '20171024-072846-e9f2' is the Dataset ID, '20171024-074102-fe73' is the Model Job ID, 'flower_model' is what I've named my model to be saved as, you can name it as you please and 'name_your_docker_container' is the name of your docker container. To obtain name of docker container run '!sudo nvidia-docker ps'
+
+```
+download_caffe_model('20171024-072846-e9f2','20171024-074102-fe73','flower_model','name_your_docker_container')
+```
+
+# You will be prompted for an input, either enter one among the shown path's (Iterations are in Ascending order, Epoch 1 is the top one and Epoch 30 is the last one at the bottom) or if you want all iterations with the caffe log enter 'all'
+
+<kbd>
+  <img src="/d_25_jupyter_notebook_digits_download_model.png">
+</kbd>
+
+# Your model will be saved in '~/' followed by what you've called your model to be saved as which is the home directory of the VM.
+
+```
+!ls ~/flower_model
+```
+
+<kbd>
+  <img src="/d_26_jupyter_notebook_digits_saved_model_location_listing.png">
+</kbd>
