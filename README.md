@@ -131,12 +131,14 @@ FLOWER_PHOTO_PATH='/home/srpa3180/flower_photos/'
 
 ## Its Important we note down the dataset id as shown from the above response
 
-#####
+# Step 6 : Creating a caffe Model
+
+For creating our model, we shall run the following.
 
 ```
 !curl localhost:5000/models/images/classification.json -b digits.cookie -XPOST -F model_name=google_flowers_model -F dataset=20171024-072846-e9f2 -F method=standard -F standard_networks=googlenet -F train_epochs=30 -F framework=caffe 
 ```
-## The Following indicates that the dataset in initialized
+## The Following indicates that the model is initialized
 
 <kbd>
   <img src="/d_15_jupyter_notebook_digits_initialize_model.png">
@@ -147,6 +149,7 @@ FLOWER_PHOTO_PATH='/home/srpa3180/flower_photos/'
 ```
 !curl localhost:5000/models/20171024-074102-fe73/status
 ```
+
 ## The Following indicates the status of the model, "running".
 
 <kbd>
