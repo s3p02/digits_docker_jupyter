@@ -57,6 +57,11 @@ Open a web-browser and go to [localhost:8888](localhost:8888)
 </kbd>
 
 
+Thw whole notion of using the curl command is to use the NVIDIA DIGITS [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) [API](https://en.wikipedia.org/wiki/Application_programming_interface) (Application Programming Interface). We shall use this API for self-contained, stateless queries in order to create datasets and models, retrieve job information and perform inference on a trained model. This interface is easily scriptable, using python as well.
+
+In this tutorial as we walk-through we will see how the API may be used to create an image classification model. As we initialized the docker container, we specified the port 5000 so we will be assuming DIGITS is running on localhost:5000
+
+
 # Step 4 : Login to DIGITS
 
 In order to create a dataset, you will first need to log in. The following command will log us in as user, you may enter your name.
@@ -68,6 +73,8 @@ In order to create a dataset, you will first need to log in. The following comma
 <kbd>
   <img src="/d_9_jupyter_notebook_digits_login.png">
 </kbd>
+
+The -c digits.cookie flag instructs curl to store the [session cookie](https://en.wikipedia.org/wiki/HTTP_cookie) into digits.cookie. DIGITS requires users to log in before creating jobs. A job can only be edited or deleted by the user that created it. The session cookie is required for all commands that create or modify jobs. For those commands we will use -b digits.cookie in the curl command line to pass the session cookie to DIGITS.
 
 # Step 5 : Creating a Dataset
 
@@ -81,6 +88,7 @@ For our dataset, we shall use google's creative-commons licensed flower photos.
 <kbd>
   <img src="/d_10_jupyter_notebook_digits_download_flowers.png">
 </kbd>
+
 
 ## Check for dataset
 
@@ -103,6 +111,10 @@ FLOWER_PHOTO_PATH='/home/srpa3180/flower_photos/'
 ```
 !curl localhost:5000/datasets/images/classification.json -b digits.cookie -XPOST -F folder_train=$FLOWER_PHOTO_PATH -F encoding=jpg -F resize_channels=1 -F resize_width=240 -F resize_height=240 -F method=folder -F dataset_name=google_flowers_dataset
 ```
+
+
+To know more about how we set the value of various fields in the dataset creation form, using the REST API, please refer to Nvidia's comprehensive list of the available form fields in [forms.py](https://github.com/NVIDIA/DIGITS/blob/master/digits/dataset/images/classification/forms.py)
+
 ## The Following indicates that the dataset in initialized
 
 <kbd>
