@@ -1,4 +1,4 @@
-# Step i : Interact with the DIGITS Docker Container using Jupyter
+## Step i : Interact with the DIGITS Docker Container using Jupyter
 
 
 ```
