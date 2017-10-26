@@ -15,6 +15,8 @@ Save/copy the token presented.
 
 # Step 2 : Port Forward on Local System
 
+If your local machine is running linux/mac os, run the following by for [port forwarding](https://help.ubuntu.com/community/SSH/OpenSSH/PortForwarding). 
+
 ```
 ssh -i ~/.ssh/gcp_new -N -f -L localhost:8888:localhost:8889 __user__name__@__external__ip__address
 ```
