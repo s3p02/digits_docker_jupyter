@@ -1,6 +1,4 @@
-# digits_docker_jupyter
-
-# Step 1 : Interact with the DIGITS Docker Container using Jupyter
+# Step i) : Interact with the DIGITS Docker Container using Jupyter
 
 
 ```
@@ -13,7 +11,7 @@ Save/copy the token presented.
 </kbd>
 
 
-# Step 2 : Port Forward on Local System
+# Step ii) : Port Forward on Local System
 
 If your local machine is running linux/mac os, run the following by for [port forwarding](https://help.ubuntu.com/community/SSH/OpenSSH/PortForwarding). 
 
@@ -23,7 +21,7 @@ ssh -i ~/.ssh/gcp_new -N -f -L localhost:8888:localhost:8889 __user__name__@__ex
 
 Say 'yes' for ECDSA key fingerprint.
 
-# Step 3 : Launch Jupyter Notebook on Local System
+# Step iii) : Launch Jupyter Notebook on Local System
 
 Open a web-browser and go to [localhost:8888](localhost:8888)
 
@@ -64,7 +62,7 @@ Thw whole notion of using the curl command is to use the NVIDIA DIGITS [REST](ht
 In this tutorial as we walk-through we will see how the API may be used to create an image classification model. As we initialized the docker container, we specified the port 5000 so we will be assuming DIGITS is running on localhost:5000
 
 
-# Step 4 : Login to DIGITS
+# Step iv : Login to DIGITS
 
 In order to create a dataset, you will first need to log in. The following command will log us in as user, you may enter your name.
 
@@ -78,7 +76,7 @@ In order to create a dataset, you will first need to log in. The following comma
 
 The -c digits.cookie flag instructs curl to store the [session cookie](https://en.wikipedia.org/wiki/HTTP_cookie) into digits.cookie. DIGITS requires users to log in before creating jobs. A job can only be edited or deleted by the user that created it. The session cookie is required for all commands that create or modify jobs. For those commands we will use -b digits.cookie in the curl command line to pass the session cookie to DIGITS.
 
-# Step 5 : Creating a Dataset
+# Step v) : Creating a Dataset
 
 For our dataset, we shall use google's creative-commons licensed flower photos.
 
@@ -145,7 +143,7 @@ To know more about how we set the value of various fields in the dataset creatio
 
 ## Its Important we note down the dataset id as shown from the above response
 
-# Step 6 : Creating a caffe Model
+# Step vi) : Creating a caffe Model
 
 For creating our model, we shall run the following.
 
@@ -276,7 +274,7 @@ For creating our model, we shall run the following.
 </kbd>
 
 
-# Step 7 : Download model from docker container
+# Step vii) : Download model from docker container
 
 ```
 def download_caffe_model(dataset_id,job_id,dir_name,docker_container_name):
@@ -304,6 +302,7 @@ def download_caffe_model(dataset_id,job_id,dir_name,docker_container_name):
     !sudo cp $d_ir_temp/$job_id/train_val.prototxt $d_ir
     !sudo rm -rf $d_ir_temp/
 ```
+This is a function aimed to perform in jupyter environment.
 
 # Run the above function
 
