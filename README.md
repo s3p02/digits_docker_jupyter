@@ -1,3 +1,5 @@
+# DIGITS access through jupyter.
+
 ## Step i : Interact with the DIGITS Docker Container using Jupyter
 
 
